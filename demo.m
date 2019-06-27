@@ -17,7 +17,7 @@ anova(mdl); % shows 'cyl' not significant
 mdl = fitglme(t,'mpg~orig + disp + hp + wgt + (1|mfg) + (1|year)', 'DummyVarCoding', 'effects');
 
 % use emmeans
-emm = emmeans(mdl, {'orig'});
+emm = emmeans(mdl, {'orig'}, 'effects');
 h = emmip(emm,'orig');
 
 % change plot order
