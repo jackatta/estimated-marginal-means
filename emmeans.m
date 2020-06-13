@@ -257,8 +257,12 @@ end
 for jj=length(spec):-1:1
     snames = regexp([allterms{tlbl==0}],[spec{jj} '_'],'split');
     snames = [snames{cellfun('length',snames)==2}];
-    snames = snames(~cellfun('isempty',snames));
-    ref_lvl(jj) = setdiff(bal_table.(spec{jj}), snames);
+    if iscell(snames) 
+        snames = snames(~cellfun('isempty',snames));
+        ref_lvl(jj) = setdiff(bal_table.(spec{jj}), snames);
+    else % if no zero interaction term containing ref level
+        ref_lvl(jj) = {''};
+    end
 end
 
 % cycle through desired marginal means
